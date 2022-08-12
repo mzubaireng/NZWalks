@@ -2,6 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using NZWalks.API.Data;
+using NZWalks.API.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +23,8 @@ builder.Services.AddDbContext<NZWalksDbContext>(
 
     );
 
-
-
+builder.Services.AddScoped<IRegionRepository, RegionRepository>();
+builder.Services.AddAutoMapper(typeof(Program).Assembly); // to transfer Domain model to DTOs model
 
 var app = builder.Build();
 
