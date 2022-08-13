@@ -2,10 +2,9 @@
 
 namespace NZWalks.API.Models.DTO
 {
-    public class Region
+    public class UpdateRegionRequest
     {
-        public Guid Id { get; set; }
-        // public string? DTOAutomapperRegionCode { get; set; } // ? is to make nullable property
+        // here we can skip some properties if we do not want to update.
         public string Code { get; set; } // ? is to make nullable property
         public string Name { get; set; }
         public double Area { get; set; }
@@ -17,8 +16,5 @@ namespace NZWalks.API.Models.DTO
         // navigation property
         // a region can have many walks
         public IEnumerable<Walk> Walkes { get; set; }
-
-
-
     }
 }
