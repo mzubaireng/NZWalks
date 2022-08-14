@@ -13,7 +13,7 @@ namespace NZWalks.API.Controllers
         private readonly IWalkRepository walkRepository;
         private readonly IMapper mapper;
 
-        // inject IWalkRepositroy
+        // inject IWalkRepositroy and IMapper
 
         public WalksController(IWalkRepository walkRepository, IMapper mapper)
         {
@@ -53,7 +53,7 @@ namespace NZWalks.API.Controllers
             if (walkDomain == null)
             {
                 return NotFound(); // 404
-            }
+             }
             //convert domain model to DTO model      
             var walksDTO = mapper.Map<Models.DTO.Walk>(walkDomain);
             return Ok(walksDTO);
@@ -84,8 +84,10 @@ namespace NZWalks.API.Controllers
             // return response back to client
             return CreatedAtAction(nameof(GetWalkAsync), new { id = walkDTO.Id }, walkDTO);
         }
+
+
         [HttpPut]
-        [Route("{id:guid}")]
+        [Route("{id:guid}")] // restrict id for Guid
         public async Task<IActionResult> UpdateWalkAsync([FromRoute] Guid id, [FromBody] Models.DTO.UpdateWalkRequest  updateWalkRequest)
         {
             // convert DTO model to Domain Model
@@ -96,12 +98,10 @@ namespace NZWalks.API.Controllers
                 Length =updateWalkRequest .Length ,
                 RegionId =updateWalkRequest .RegionId ,
                 WalkDifficultyId =updateWalkRequest .WalkDifficultyId 
-
             };
 
-            // update region using repository
+            // update walk using repository
             walkDomain = await walkRepository.UpdateAsync(id, walkDomain);
-
 
             // handle null NotFound()
             if (walkDomain == null)
@@ -109,10 +109,7 @@ namespace NZWalks.API.Controllers
             // convert domain back to DTO
 
             var walkDTO = mapper.Map<Models.DTO.Walk >(walkDomain);
-
-
             return Ok(walkDTO);
-
 
         }
 

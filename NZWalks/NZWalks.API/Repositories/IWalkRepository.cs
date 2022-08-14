@@ -2,8 +2,7 @@
 
 namespace NZWalks.API.Repositories
 {
-    public interface  IWalkRepository
-    {
+    public interface  IWalkRepository    {
         // Define contracts
 
         public  Task<IEnumerable<Walk>> GetAllAsync();

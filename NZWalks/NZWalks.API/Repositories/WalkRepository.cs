@@ -71,7 +71,7 @@ namespace NZWalks.API.Repositories
     public async  Task<Walk> AddAsync(Walk walk)
         {
             walk.Id = Guid.NewGuid(); // override id
-            await nZWalksDbContext.AddAsync(walk);
+            await nZWalksDbContext.Walks.AddAsync(walk);
             await nZWalksDbContext.SaveChangesAsync();
             return walk;
 
@@ -80,30 +80,27 @@ namespace NZWalks.API.Repositories
       public async  Task<Walk> UpdateAsync(Guid id, Walk walk )
 
         {
-            var existingRegion = await nZWalksDbContext.Walks.FindAsync(id);// for primary key
-            //var existingRegion = await nZWalksDbContext.Walks.FirstOrDefaultAsync(x => x.Id == id);
-            if (existingRegion == null) return null;
+            var existingWalk = await nZWalksDbContext.Walks.FindAsync(id);// for primary key
+            //var existingWalk = await nZWalksDbContext.Walks.FirstOrDefaultAsync(x => x.Id == id);
+            if (existingWalk == null) return null;
 
-            existingRegion.Name = walk.Name;
-            existingRegion.Length = walk.Length;
-            existingRegion.RegionId = walk.RegionId;
-            existingRegion.WalkDifficultyId = walk.WalkDifficultyId;
+            existingWalk.Name = walk.Name;
+            existingWalk.Length = walk.Length;
+            existingWalk.RegionId = walk.RegionId;
+            existingWalk.WalkDifficultyId = walk.WalkDifficultyId;
 
             await nZWalksDbContext.SaveChangesAsync();
-            return existingRegion;
-
-
-
+            return existingWalk;
 
         }
 
        public async  Task<Walk> DeleteAsync(Guid id)
         {
-            var existingRegion = await nZWalksDbContext.Walks.FindAsync(id);// for primary key
-            if (existingRegion == null) return null;
-            nZWalksDbContext.Walks.Remove(existingRegion);
+            var existingWalk = await nZWalksDbContext.Walks.FindAsync(id);// for primary key
+            if (existingWalk == null) return null;
+            nZWalksDbContext.Walks.Remove(existingWalk);
             await nZWalksDbContext.SaveChangesAsync();
-            return existingRegion;
+            return existingWalk;
         }
 
 
