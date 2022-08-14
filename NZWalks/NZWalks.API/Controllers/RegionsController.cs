@@ -176,7 +176,7 @@ namespace NZWalks.API.Controllers
             region = await regionRepository.UpdateAsync(id, region);
 
             if (region == null)
-                return null;
+                return NotFound ();
             // convert domain back to DTO
 
             var regionDTO = mapper.Map<Models.DTO.Region>(region);

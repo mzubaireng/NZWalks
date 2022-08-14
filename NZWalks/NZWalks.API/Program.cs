@@ -24,9 +24,11 @@ builder.Services.AddDbContext<NZWalksDbContext>(
     );
 
 builder.Services.AddScoped<IRegionRepository, RegionRepository>();
-builder.Services.AddAutoMapper(typeof(Program).Assembly); // to transfer Domain model to DTOs model
 
-var app = builder.Build();
+
+builder.Services.AddScoped<IWalkRepository, WalkRepository>();
+builder.Services.AddAutoMapper(typeof(Program).Assembly); // to transfer Domain model to DTOs model
+ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

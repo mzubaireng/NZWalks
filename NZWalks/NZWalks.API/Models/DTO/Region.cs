@@ -16,7 +16,7 @@ namespace NZWalks.API.Models.DTO
 
         // navigation property
         // a region can have many walks
-        public IEnumerable<Walk> Walkes { get; set; }
+       // public IEnumerable<Walk> Walkes { get; set; }
 
 
 

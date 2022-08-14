@@ -4,7 +4,7 @@ namespace NZWalks.API.Models.DTO
 {
     public class AddRegionRequest
     {
-
+        // this will be used to update operation
         public string Code { get; set; } // ? is to make nullable property
         public string Name { get; set; }
         public double Area { get; set; }
